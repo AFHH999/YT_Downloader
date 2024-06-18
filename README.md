@@ -5,7 +5,6 @@ This is an scrip that can download the youtube videos you want with the link, wh
 ## Table of contents
 - [Installation](#installation) 
 - [Usage](#usage)
-- [Configurations](#configuration)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 

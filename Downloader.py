@@ -5,7 +5,8 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Slot
 from pytube import YouTube, Stream
-class MainWindow(QMainWindow):
+
+class MainWindow(QMainWindow):  # This function create the main window and what is inside of it
     def __init__(self):
         super().__init__()
         self.setWindowTitle("YouTube Downloader")
@@ -40,7 +41,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.status_label)
         self.init_menu()
 
-    def show_resolution_dialog(self, yt):
+    def show_resolution_dialog(self, yt): # This function initialize the menu for choosing the resolution for the download.
         resolutions = yt.streams.filter(progressive=True).order_by('resolution').desc()
         resolution_list = [f"{stream.resolution} ({stream.abr})" for stream in resolutions]
         
@@ -75,7 +76,7 @@ class MainWindow(QMainWindow):
         
         self.download()
 
-    def init_menu(self):
+    def init_menu(self): # This function define the menu for choosing the path
         menu_bar = QMenuBar(self)
         self.setMenuBar(menu_bar)
         file_menu = menu_bar.addMenu('File')
@@ -83,7 +84,7 @@ class MainWindow(QMainWindow):
         select_path_action.triggered.connect(self.select_download_path)
         file_menu.addAction(select_path_action)
 
-    @Slot()
+    @Slot()  # This is the signal that indicates when the path for download was chosen
     def select_download_path(self):
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.Directory)
@@ -97,7 +98,7 @@ class MainWindow(QMainWindow):
         url = self.link_input.text()
         return url
     
-    def download(self):
+    def download(self): 
         url = self.get_input()
         if not url:
             self.status_label.setText("Please enter a URL")
@@ -124,7 +125,7 @@ class MainWindow(QMainWindow):
             self.download_path = ""
             self.link_input.setText("")
 
-    def update_progress(self, stream, chunk, bytes_remaining):
+    def update_progress(self, stream, chunk, bytes_remaining): # This function update the progress for the progress bar
         self.total_bytes_downloaded += len(chunk)
         if self.total_bytes_expected:
             progress = (self.total_bytes_downloaded / self.total_bytes_expected) * 100

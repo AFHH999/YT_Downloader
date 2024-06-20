@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):  # This function create the main window and what 
         else:
             return None
 
-    def start_download_if_ready(self): #This function check for a URL.
+    def start_download_if_ready(self):
         url = self.get_input()
         if not url or not self.download_path:
             return
